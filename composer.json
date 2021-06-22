@@ -1,0 +1,20 @@
+{
+    "name": "jeckel/test-slim-ddd",
+    "require": {
+        "slim/slim": "^4.8",
+        "slim/psr7": "^1.4",
+        "php-di/php-di": "^6.3",
+        "monolog/monolog": "^2.2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6",
+        "vimeo/psalm": "^4.8",
+        "qossmic/deptrac-shim": "^0.13.0"
+    },
+    "authors": [
+        {
+            "name": "Julien Mercier-Rojas",
+            "email": "julien@jeckel-lab.fr"
+        }
+    ]
+}
