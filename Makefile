@@ -14,3 +14,6 @@ build: var/log/.docker-build
 
 up: var/log/.docker-build
 	@$(DOCKER_CMD) up
+
+stop: var/log/.docker-build
+	@$(DOCKER_CMD) down --remove-orphan

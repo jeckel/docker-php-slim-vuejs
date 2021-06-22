@@ -9,7 +9,7 @@ volumes:
   mysqldata:
 
 services:
-  webserver:
+  nginx:
     image: nginx:alpine
     container_name: slim-nginx
     working_dir: /application
@@ -20,10 +20,9 @@ services:
       traefik.enable: "true"
       traefik.http.routers.slim_test.rule: "Host(`slim.local`)"
       traefik.http.routers.slim_test.entrypoints: "web"
-#        traefik.http.services.slim_test.loadbalancer.server.port: "8000"
       traefik.docker.network: "${TRAEFIK_NETWORK:-traefik_proxy}"
-    ports:
-      - "8080:80"
+#    ports:
+#      - "8080:80"
     networks:
       default:
       traefik:
@@ -42,6 +41,25 @@ services:
     volumes:
       - ./:/application
       - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/8.0/fpm/conf.d/99-overrides.ini
+    networks:
+      default:
+
+  vuejs:
+    build:
+      context: ./docker/vuejs
+      dockerfile: Dockerfile
+      args:
+        uid: ${CURRENT_UID:-1001}
+        gid: ${CURRENT_GID:-1001}
+    container_name: slim-vuejs
+    working_dir: /application
+    volumes:
+      - ./front-vue/:/application
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    command: npx vue-cli-service serve --host 0.0.0.0
+#    command: npm run serve
     networks:
       default:
 
