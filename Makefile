@@ -1,4 +1,4 @@
-.PHONY: build
+.PHONY: build up stop
 
 CURRENT_UID ?= $(shell id -u)
 CURRENT_GID ?= $(shell id -g)

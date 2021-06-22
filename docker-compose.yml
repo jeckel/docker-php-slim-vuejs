@@ -21,8 +21,6 @@ services:
       traefik.http.routers.slim_test.rule: "Host(`slim.local`)"
       traefik.http.routers.slim_test.entrypoints: "web"
       traefik.docker.network: "${TRAEFIK_NETWORK:-traefik_proxy}"
-#    ports:
-#      - "8080:80"
     networks:
       default:
       traefik:
@@ -55,11 +53,7 @@ services:
     working_dir: /application
     volumes:
       - ./front-vue/:/application
-    ports:
-      - "8080:8080"
-      - "8000:8000"
     command: npx vue-cli-service serve --host 0.0.0.0
-#    command: npm run serve
     networks:
       default:
 
